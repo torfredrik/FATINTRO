@@ -9,11 +9,12 @@
 <title>Cyborg geisha geiter og alt det der</title>
 </head>
 <body>
-<audio id="music" src="vieux_-_hisboyelroy_-_Ana_(hisboyelroy_s_smooth_dub).mp3">
+<audio id="music" src="Dub_Terminator_-_03_-_Dope_magnets.mp3">
 <p>Your browser does not support the audio element.</p>
 </audio>
 <canvas id="c" width="1280" height="720"/>
 <script>
+    music = document.getElementById("music");
     var c = document.getElementById('c');
     var imageObj,
       bgObj, 
@@ -30,13 +31,12 @@
       rad,
       i, j, x,
       idx,
-      as = Math.random(300)*5,
-      fd = Math.random(300)*10,
-      as1 = Math.random(200)*50,
-      fd1 = Math.random(300)*50,
-      ps = (Math.random(200)*20)-10,
-      ps1 = (Math.random(200)*40)-20,
-      music = document.getElementById("music");
+      as = 10.6,
+      fd = 50.4,
+      as1 = 4.4,
+      fd1 = 2.2,
+      ps = -8.4,
+      ps1 = 13.3;
       window.requestAnimFrame = (function(callback) {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
         function(callback) {
