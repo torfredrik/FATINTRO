@@ -17,18 +17,20 @@
           window.setTimeout(callback, 50);
         };
       })();
-
+      var imageObj = new Image();
+      imageObj.src = "./box.png";
+      var t = 0;
       function animate() {
         var c = document.getElementById('c');
         var I = c.getContext('2d');
 
         // update
-
+        t += 50;
         // clear
-        context.clearRect(0, 0, c.width, c.height);
+        I.clearRect(0, 0, c.width, c.height);
 
         // draw stuff
-
+        I.drawImage(imageObj, 0.25*t, 0.25*t);
         // request new frame
         requestAnimFrame(function() {
           animate();
@@ -37,9 +39,5 @@
       animate();
 
     </script>
-<audio controls>
-   <source src="horse.mp3" type="audio/mpeg">
- Your browser does not support the audio element.
- </audio>
 </body>
 </html>
