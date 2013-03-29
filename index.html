@@ -30,7 +30,7 @@
         I.clearRect(0, 0, c.width, c.height);
 
         // draw stuff
-        I.drawImage(imageObj, 0.25*t, 0.25*t);
+        I.drawImage(imageObj,0.25*t % c.width, 100*(1 + Math.sin(t/500)));
         // request new frame
         requestAnimFrame(function() {
           animate();
