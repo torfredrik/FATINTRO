@@ -53,6 +53,8 @@ function init() {
   imageObj.src = "./geisha2.png";
   bgObj = new Image();
   bgObj.src = "./bg1.png";
+  cv.fillStyle = "black";
+  cv.fillRect(0,0,c.width,c.height);
 }
 function main() {
   init();
@@ -96,10 +98,11 @@ function drawPlasma() {
         // update
         t0 += ti;
         //background
-        if (t0 < 5000) drawBG();
-        else if (t0 < 15000) drawPlasma();
+        if (t0 < 5000) ;
+        else if ( t0 < 15000) drawBG();
+        else if (t0 < 45000) drawPlasma();
         // draw stuff
-        cv.drawImage(imageObj,0.25*t0 % c.width, 100*(1 + Math.sin(t0/500)));
+        cv.drawImage(imageObj,-300 +(0.25*t0 % c.width), 100*(1 +  Math.sin(t0/500)));
         // request new frame
         requestAnimFrame(function() {
           loop();
