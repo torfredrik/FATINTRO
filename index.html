@@ -53,8 +53,6 @@ function init() {
   imageObj.src = "./geisha2.png";
   bgObj = new Image();
   bgObj.src = "./bg1.png";
-  cv.fillStyle = "black";
-  cv.fillRect(0,0,c.width,c.height);
 }
 function main() {
   init();
@@ -91,18 +89,22 @@ function drawPlasma() {
     p1 += ps;
     p3 += ps1;
   }
-  function drawBG() {
-        cv.drawImage(bgObj, 0, 0);
-  }
   function loop() {
         // update
         t0 += ti;
         //background
-        if (t0 < 5000) ;
-        else if ( t0 < 15000) drawBG();
+        if (t0 < 5000) {
+           cv.fillStyle = "white";
+            //cv.fillRect(0,0, c.width, c.height);
+           cv.fillStyle = "black'";
+           cv.fillText("aaaaaabbbbbbccc", 248, 43);
+           cv.fillText("tttttttttext", 58, 165);  
+        }else if ( t0 < 15000) cv.drawImage(bgObj, 0, 0);
         else if (t0 < 45000) drawPlasma();
+        else cv.fillRect(0,0,c.width, c.height);
         // draw stuff
-        cv.drawImage(imageObj,-300 +(0.25*t0 % c.width), 100*(1 +  Math.sin(t0/500)));
+        if (t0 < 5000) ;
+        else cv.drawImage(imageObj,-300 +(0.25*t0 % c.width), 100*(1 +  Math.sin(t0/500)));
         // request new frame
         requestAnimFrame(function() {
           loop();
@@ -110,8 +112,5 @@ function drawPlasma() {
       }
     main();
 </script>
-<audio id="music" src="vieux_-_hisboyelroy_-_Ana_(hisboyelroy_s_smooth_dub).mp3">
-<p>Your browser does not support the audio element.</p>
-</audio>
 </body>
 </html>
