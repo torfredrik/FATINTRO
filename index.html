@@ -16,7 +16,9 @@
 <script>
     music = document.getElementById("music");
     var c = document.getElementById('c');
-    var imageObj,
+    var geisha,
+      goat,
+      cyborg,
       bgObj, 
       p1 = 0,
       p2 = 0,
@@ -49,8 +51,12 @@ function init() {
     rad = (i * 0.703125) * 0.0174532;
     aSin[i] = Math.sin(rad) * 1024;
   }
-  imageObj = new Image();
-  imageObj.src = "./geisha2.png";
+  geisha = new Image();
+  geisha.src = "./geisha2.png";
+  cyborg = new Image();
+  cyborg.src = "./cyborg.png";
+  goat = new Image();
+  goat.src = "./goat3.png";
   bgObj = new Image();
   bgObj.src = "./bg1.png";
 }
@@ -94,17 +100,19 @@ function drawPlasma() {
         t0 += ti;
         //background
         if (t0 < 5000) {
-           cv.fillStyle = "white";
-            //cv.fillRect(0,0, c.width, c.height);
-           cv.fillStyle = "black'";
-           cv.fillText("aaaaaabbbbbbccc", 248, 43);
-           cv.fillText("tttttttttext", 58, 165);  
+           cv.fillStyle = "#000000";
+           cv.fillRect(0,0, c.width, c.height);
         }else if ( t0 < 15000) cv.drawImage(bgObj, 0, 0);
         else if (t0 < 45000) drawPlasma();
         else cv.fillRect(0,0,c.width, c.height);
         // draw stuff
-        if (t0 < 5000) ;
-        else cv.drawImage(imageObj,-300 +(0.25*t0 % c.width), 100*(1 +  Math.sin(t0/500)));
+        if (t0 < 5000) {
+          cv.font = "bold 50px sans-serif";
+          cv.fillStyle = "#FFFFFF";
+          cv.fillText("GEIT!", 550, 300);
+        }else if (t0 < 15000) {
+          cv.drawImage(goat, -300 +(0.25*t0 % c.width), 200 + 50*(1 +  Math.sin(t0/500)));
+        } else cv.drawCyborg(imageObj,-300 +(0.25*t0 % c.width), 200 + 50*(1 +  Math.sin(t0/500)));
         // request new frame
         requestAnimFrame(function() {
           loop();
