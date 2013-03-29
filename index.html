@@ -15,12 +15,13 @@
 <canvas id="c" width="1280" height="720"/>
 <script>
     var c = document.getElementById('c');
-    var imageObj, 
+    var imageObj,
+      bgObj, 
       p1 = 0,
       p2 = 0,
       p3 = 0,
       p4 = 0,
-      t = 0,
+      t0 = 0,
       t1, t2, t3, t4,
       aSin = [],
       ti = 15,
@@ -29,8 +30,13 @@
       rad,
       i, j, x,
       idx,
-      as = 10.6, fd = 50.4, as1 = 4.4, fd1 = 2.2, ps = -8.4, ps2 = 13.3;
-      var music = document.getElementById("music");
+      as = Math.random(300)*5,
+      fd = Math.random(300)*10,
+      as1 = Math.random(200)*50,
+      fd1 = Math.random(300)*50,
+      ps = (Math.random(200)*20)-10,
+      ps1 = (Math.random(200)*40)-20,
+      music = document.getElementById("music");
       window.requestAnimFrame = (function(callback) {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
         function(callback) {
@@ -44,7 +50,9 @@ function init() {
     aSin[i] = Math.sin(rad) * 1024;
   }
   imageObj = new Image();
-  imageObj.src = "./geisha1.png";
+  imageObj.src = "./geisha2.png";
+  bgObj = new Image();
+  bgObj.src = "./bg1.png";
 }
 function main() {
   init();
@@ -56,50 +64,44 @@ function drawPlasma() {
   cdData = cd.data;     
   t4 = p4;
   t3 = p3;
-  i = 1280; while(i--) {
+  i = c.width; while(i--) {
     t1 = p1 + 5;
     t2 = p2 + 3;
-
     t3 &= 511;
     t4 &= 511;
-
-    j = 720; while(j--) {
+    j = c.height; while(j--) {
       t1 &= 511;
       t2 &= 511;
-
       x = aSin[t1] + aSin[t2] + aSin[t3] + aSin[t4];
-
       idx = (i + j * c.width) * 4;
-      
       cdData[idx] = x/as;
       cdData[idx + 1] = x/fd;
       cdData[idx + 2] = x/ps;
       cdData[idx + 3] = 255;
-      
       t1 += 5;
       t2 += 3;
     }
-
     t4 += as1;
     t3 += fd1;
-    
   }
-    
     cd.data = cdData;    
     cv.putImageData(cd, 0, 0);
     p1 += ps;
-    p3 += ps2;
+    p3 += ps1;
+  }
+  function drawBG() {
+        cv.drawImage(bgObj, 0, 0);
   }
   function loop() {
         // update
-        t += ti;
-        // clear
-
+        t0 += ti;
+        //background
+        if (t0 < 5000) drawBG();
+        else if (t0 < 15000) drawPlasma();
         // draw stuff
-        cv.drawImage(imageObj,0.25*t % c.width, 100*(1 + Math.sin(t/500)));
+        cv.drawImage(imageObj,0.25*t0 % c.width, 100*(1 + Math.sin(t0/500)));
         // request new frame
         requestAnimFrame(function() {
-          drawPlasma();
           loop();
         });
       }
