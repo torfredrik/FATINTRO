@@ -9,37 +9,103 @@
 <title>Cyborg geisha geiter og alt det der</title>
 </head>
 <body>
+<audio id="music" src="vieux_-_hisboyelroy_-_Ana_(hisboyelroy_s_smooth_dub).mp3">
+<p>Your browser does not support the audio element.</p>
+</audio>
 <canvas id="c" width="1280" height="720"/>
 <script>
+    var c = document.getElementById('c');
+    var imageObj, 
+      p1 = 0,
+      p2 = 0,
+      p3 = 0,
+      p4 = 0,
+      t = 0,
+      t1, t2, t3, t4,
+      aSin = [],
+      ti = 15,
+      cv = c.getContext('2d'),
+      cd = cv.createImageData(1280, 720),
+      rad,
+      i, j, x,
+      idx,
+      as = 2.6, fd = 0.4, as1 = 4.4, fd1 = 2.2, ps = -4.4, ps2 = 3.3;
+      var music = document.getElementById("music");
       window.requestAnimFrame = (function(callback) {
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
         function(callback) {
-          window.setTimeout(callback, 50);
+          window.setTimeout(callback, ti);
         };
       })();
-      var imageObj = new Image();
-      imageObj.src = "./box.png";
-      var t = 0;
-      function animate() {
-        var c = document.getElementById('c');
-        var I = c.getContext('2d');
+function init() {
+  var i = 512;
+  while (i--) {
+    rad = (i * 0.703125) * 0.0174532;
+    aSin[i] = Math.sin(rad) * 1024;
+  }
+  imageObj = new Image();
+  imageObj.src = "./goat3.png";
+}
+function main() {
+  init();
+  music.play();
+  animate();  
+}
 
+function draw() {   
+  cdData = cd.data;     
+  t4 = p4;
+  t3 = p3;
+  i = 1280; while(i--) {
+    t1 = p1 + 5;
+    t2 = p2 + 3;
+
+    t3 &= 511;
+    t4 &= 511;
+
+    j = 720; while(j--) {
+      t1 &= 511;
+      t2 &= 511;
+
+      x = aSin[t1] + aSin[t2] + aSin[t3] + aSin[t4];
+
+      idx = (i + j * c.width) * 4;
+      
+      cdData[idx] = x/as;
+      cdData[idx + 1] = x/fd;
+      cdData[idx + 2] = x/ps;
+      cdData[idx + 3] = 255;
+      
+      t1 += 5;
+      t2 += 3;
+    }
+
+    t4 += as1;
+    t3 += fd1;
+    
+  }
+    
+    cd.data = cdData;    
+    cv.putImageData(cd, 0, 0);
+    p1 += ps;
+    p3 += ps2;
+  }
+  function animate() {
         // update
         t += 50;
         // clear
-        I.clearRect(0, 0, c.width, c.height);
 
         // draw stuff
-        I.drawImage(imageObj,0.25*t % c.width, 100*(1 + Math.sin(t/500)));
+        cv.drawImage(imageObj,0.25*t % c.width, 100*(1 + Math.sin(t/500)));
         // request new frame
         requestAnimFrame(function() {
+          draw();
           animate();
         });
       }
-      animate();
-
-    </script>
-<audio src="vieux_-_Ana_(Vocals).mp3" autoplay loop>
+    main();
+</script>
+<audio id="music" src="vieux_-_hisboyelroy_-_Ana_(hisboyelroy_s_smooth_dub).mp3">
 <p>Your browser does not support the audio element.</p>
 </audio>
 </body>
