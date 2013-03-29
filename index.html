@@ -1,1 +1,45 @@
-FAST INTRO BITCHES
+<html>
+<head>
+  <style>
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+<title>Cyborg geisha geiter og alt det der</title>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"/>
+<script>
+      window.requestAnimFrame = (function(callback) {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+        function(callback) {
+          window.setTimeout(callback, 50);
+        };
+      })();
+
+      function animate() {
+        var c = document.getElementById('c');
+        var I = c.getContext('2d');
+
+        // update
+
+        // clear
+        context.clearRect(0, 0, c.width, c.height);
+
+        // draw stuff
+
+        // request new frame
+        requestAnimFrame(function() {
+          animate();
+        });
+      }
+      animate();
+
+    </script>
+<audio controls>
+   <source src="horse.mp3" type="audio/mpeg">
+ Your browser does not support the audio element.
+ </audio>
+</body>
+</html>
