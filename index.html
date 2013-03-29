@@ -44,15 +44,15 @@ function init() {
     aSin[i] = Math.sin(rad) * 1024;
   }
   imageObj = new Image();
-  imageObj.src = "./goat3.png";
+  imageObj.src = "./geisha1.png";
 }
 function main() {
   init();
   music.play();
-  animate();  
+  loop();  
 }
 
-function draw() {   
+function drawPlasma() {   
   cdData = cd.data;     
   t4 = p4;
   t3 = p3;
@@ -90,17 +90,17 @@ function draw() {
     p1 += ps;
     p3 += ps2;
   }
-  function animate() {
+  function loop() {
         // update
-        t += 50;
+        t += ti;
         // clear
 
         // draw stuff
         cv.drawImage(imageObj,0.25*t % c.width, 100*(1 + Math.sin(t/500)));
         // request new frame
         requestAnimFrame(function() {
-          draw();
-          animate();
+          drawPlasma();
+          loop();
         });
       }
     main();
