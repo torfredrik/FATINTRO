@@ -6,21 +6,13 @@
       padding: 0px;
     }
   </style>
-<title>Cyborg geisha geiter og alt det der</title>
+<title>Hello World!</title>
 </head>
 <body>
-<audio id="music" src="Dub_Terminator_-_03_-_Dope_magnets.mp3">
-<p>Your browser does not support the audio element.</p>
-</audio>
 <canvas id="c" width="1280" height="720"/>
 <script>
-    music = document.getElementById("music");
     var c = document.getElementById('c');
-    var geisha,
-      goat,
-      cyborg,
-      bgObj, 
-      p1 = 0,
+    var p1 = 0,
       p2 = 0,
       p3 = 0,
       p4 = 0,
@@ -33,10 +25,10 @@
       rad,
       i, j, x,
       idx,
-      as = 10.6,
-      fd = 50.4,
-      as1 = 4.4,
-      fd1 = 2.2,
+      as = 12.6,
+      fd = 31.4,
+      as1 = 8.4,
+      fd1 = -12.2,
       ps = -8.4,
       ps1 = 13.3;
       window.requestAnimFrame = (function(callback) {
@@ -51,18 +43,9 @@ function init() {
     rad = (i * 0.703125) * 0.0174532;
     aSin[i] = Math.sin(rad) * 1024;
   }
-  geisha = new Image();
-  geisha.src = "./geisha2.png";
-  cyborg = new Image();
-  cyborg.src = "./cyborg.png";
-  goat = new Image();
-  goat.src = "./goat3.png";
-  bgObj = new Image();
-  bgObj.src = "./bg1.png";
 }
 function main() {
   init();
-  music.play();
   loop();  
 }
 
@@ -104,30 +87,10 @@ function drawPlasma() {
           cv.fillRect(0,0, c.width, c.height);
           cv.font = "bold 50px sans-serif";
           cv.fillStyle = "#FFFFFF";
-          cv.fillText("GEIT!", 550, 300);
-        } else if (t0 < 12000) {
-          cv.drawImage(bgObj, 0, 0);
-          cv.drawImage(goat, -300 +(0.25*t0 % c.width), 200 + 50*(1 +  Math.sin(t0/500)));
-        } else if (t0 < 16000) {
-          cv.fillStyle = "#000000";
-          cv.fillRect(0,0, c.width, c.height);
-          cv.font = "bold 50px sans-serif";
-          cv.fillStyle = "#FFFFFF";
-          cv.fillText("GEISHA!", 550, 300);
-        } else if (t0 < 25000) {
-          drawPlasma();
-          cv.drawImage(geisha, -300 +(0.25*t0 % c.width), 200 + 50*(1 +  Math.sin(t0/500)));  
-        } else if (t0 < 30000) {
-          cv.fillStyle = "#000000";
-          cv.fillRect(0,0, c.width, c.height);
-          cv.font = "bold 50px sans-serif";
-          cv.fillStyle = "#FFFFFF";
-          cv.fillText("CYBORG!", 550, 300);
+          cv.fillText("Hello World!", 550, 300);
         } else {
            drawPlasma();
-           cv.drawImage(cyborg,-300 +(0.25*t0 % c.width), 200 + 50*(1 +  Math.sin(t0/500)));
         }
- // request new frame
         requestAnimFrame(function() {
           loop();
         });
